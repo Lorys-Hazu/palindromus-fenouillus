@@ -1,0 +1,24 @@
+<p>playground works!</p>
+<button *ngIf="!started; else playground" (click)="startgame()">Vas y champion !</button>
+
+<ng-template #playground >
+
+<div>{{ timeLeft }}</div>
+<div>{{ palindromus }}</div>
+
+<button [disabled]='ended' (click)="checkIsPalindrome(true)">Oui</button>
+<button [disabled]='ended' (click)="checkIsPalindrome(false)">Non</button>
+
+<div *ngIf="!ended">
+<p>Le score est de {{ score }} points</p>
+<p>Il te reste {{ badAnswerLeft }} mauvaises réponses autorisées</p>
+</div>
+
+</ng-template>
+
+<div #endedScreen *ngIf="ended">
+<p>Joli score : {{ score }} !</p>
+<app-twitter [score]="score"></app-twitter>
+<button (click)="startgame()">On recommence zééé parti</button>
+</div>
+
