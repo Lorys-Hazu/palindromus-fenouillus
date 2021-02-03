@@ -1,24 +1,25 @@
-<p>playground works!</p>
+<div id="playground_area">
 <button *ngIf="!started; else playground" (click)="startgame()">Vas y champion !</button>
 
 <ng-template #playground >
 
-<div>{{ timeLeft }}</div>
-<div>{{ palindromus }}</div>
-
+<div id="timeleft">{{ timeLeft }}</div>
+<div id="palindromus">{{ palindromus }}</div>
+<div id="game_buttons">
 <button [disabled]='ended' (click)="checkIsPalindrome(true)">Oui</button>
 <button [disabled]='ended' (click)="checkIsPalindrome(false)">Non</button>
-
-<div *ngIf="!ended">
+</div>
+<div id="game_infos" *ngIf="!ended">
 <p>Le score est de {{ score }} points</p>
 <p>Il te reste {{ badAnswerLeft }} mauvaises réponses autorisées</p>
 </div>
 
 </ng-template>
 
-<div #endedScreen *ngIf="ended">
+<div id="end_infos" #endedScreen *ngIf="ended">
 <p>Joli score : {{ score }} !</p>
 <app-twitter [score]="score"></app-twitter>
-<button (click)="startgame()">On recommence zééé parti</button>
+<br>
+<button id="restart_button" (click)="startgame()">On recommence zé parti</button>
 </div>
-
+</div>

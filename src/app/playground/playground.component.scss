@@ -1,0 +1,33 @@
+#playground_area{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+button{
+    max-width: 150px;
+}
+
+#game_infos, #end_infos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#timeleft,#palindromus{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#restart_button{
+    max-width: 190px;
+}
+
+#game_buttons{
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
