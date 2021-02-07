@@ -94,21 +94,21 @@ export class PlaygroundComponent implements OnInit {
     checkIsPalindrome(answer) {
       // Si la réponse est correcte : 
       if (answer === this.isPalindrome){
-        console.log('bonne réponse')
         // On incrémente le score de 1
         this.score++;
         // On regénère un palindrome et on remet le temps au maximum : 2000 ms
         this.palindromus = this.palindromusGenerator();
         this.timeLeft = 2000;
         // Toutes les 5 bonnes réponses le temps maximum se décrémente de 100 ms jusqu'à atteindre 300 ms
-        if (this.timeLeft >= 300){
+        if ((this.timeLeft - Math.floor(this.score/5)*100) >= 300){
         this.timeLeft = this.timeLeft - Math.floor(this.score/5)*100
-        console.log("Le compteur max est venu à " + this.timeLeft)
+        }
+        else {
+            this.timeLeft = 300;
         }
       }
       // Si la réponse est incorrecte : 
       else {
-        console.log('mauvaise réponse')
         // On regénère un palindrome
         this.palindromus = this.palindromusGenerator();
         // Le compteur de mauvaises réponses autorisées se décrémente de 1
