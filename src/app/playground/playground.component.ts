@@ -18,6 +18,7 @@ export class PlaygroundComponent implements OnInit {
     ngOnInit(): void {}
 
     startgame() {
+        // Instanciation des étapes du jeu 
         window.clearInterval(this.timer);
         this.started = true
         this.ended = false;
@@ -39,20 +40,25 @@ export class PlaygroundComponent implements OnInit {
         const isPalindromus = Math.random();
         // Quelle est la taille du mot ?
         let palindromusLength = Math.floor(Math.random() * 16) + 3;
-        // Ou que c'est qu'on pioche les lettres
+        // Là où on récupère les lettres
         const vowels = 'aeiouy'.split('');
         const consonants = 'bcdfghjklmnpqrstvwxz'.split('');
-        // Est ce qu'on commence par une voyelle ?
+        // Commence-t-on par une voyelle ? 
         let isVowel = false;
+        // Quelle sera la première lettre ? 
         const startingLetter = Math.random();
         if (startingLetter > 0.5) {
             isVowel = true;
         }
-        // Là ça créer le Palindrome
+        // Création du palindrome
+        // Si c'est un palindrome : 
         if (isPalindromus > 0.5) {
             let palindromus = '';
+            // On coupe en deux moitié le palindrome
             palindromusLength = palindromusLength / 2;
+            // On génère la première moitié du palindrome 
             for (let i = 0; i < palindromusLength; i++) {
+                // On met en place l'alternance voyelles/consonnes
                 if (isVowel == true) {
                     palindromus += vowels[Math.floor(Math.random() * vowels.length)];
                 } else {
@@ -60,15 +66,18 @@ export class PlaygroundComponent implements OnInit {
                 }
                 isVowel = !isVowel;
             }
+            // On sépare le palindrome en deux, on l'inverse et on joint les deux parties
             palindromus += palindromus
                 .split('')
                 .reverse()
                 .join('');
             this.isPalindrome = true;
             return palindromus;
+        // Si ce n'est pas un palindrome : 
         } else {
             let palindromus = '';
             for (let i = 0; i < palindromusLength; i++) {
+                // On met en place l'alternance voyelles/consonnes
                 if (isVowel == true) {
                     palindromus += vowels[Math.floor(Math.random() * vowels.length)];
                 } else {
@@ -81,22 +90,30 @@ export class PlaygroundComponent implements OnInit {
         }
 
     }
-    checkIsPalindrome(answer) {
 
+    checkIsPalindrome(answer) {
+      // Si la réponse est correcte : 
       if (answer === this.isPalindrome){
         console.log('bonne réponse')
+        // On incrémente le score de 1
         this.score++;
+        // On regénère un palindrome et on remet le temps au maximum : 2000 ms
         this.palindromus = this.palindromusGenerator();
         this.timeLeft = 2000;
+        // Toutes les 5 bonnes réponses le temps maximum se décrémente de 100 ms jusqu'à atteindre 300 ms
         if (this.timeLeft >= 300){
         this.timeLeft = this.timeLeft - Math.floor(this.score/5)*100
         console.log("Le compteur max est venu à " + this.timeLeft)
         }
       }
+      // Si la réponse est incorrecte : 
       else {
         console.log('mauvaise réponse')
+        // On regénère un palindrome
         this.palindromus = this.palindromusGenerator();
+        // Le compteur de mauvaises réponses autorisées se décrémente de 1
         this.badAnswerLeft--
+        // Quand on a plus de mauvaises réponses autorisées, le jeu s'arrête 
         if (this.badAnswerLeft === 0){
           this.ended = true;
           this.timeLeft = 0;
