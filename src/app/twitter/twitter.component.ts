@@ -15,7 +15,7 @@ export class TwitterComponent implements OnInit {
   }
 
   getHref(){
-    return `https://twitter.com/intent/tweet?text=Un score de fou malade ${this.score}&via=BoudjemaiRayan`
+    return `https://twitter.com/intent/tweet?text=Wow j'ai obtenu un score de ${this.score}. C'est Epoustoufenouil ! Je remercie @BoudjemaiRayan, @Digitalorys et @emmaajy_ pour la création de ce magnifique bijoux d'entertainment ! `
   }
 
 }
